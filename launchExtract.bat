@@ -1,0 +1,2 @@
+python ./ExtractSerie.py
+pause
