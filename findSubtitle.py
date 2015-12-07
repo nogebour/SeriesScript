@@ -1,7 +1,6 @@
 import sys
 import os
 import os.path
-import shutil
 import re
 import operator
 from difflib import SequenceMatcher
@@ -44,6 +43,7 @@ if debug:
     directory = r"C:\Users\nogebour\Videos\Others\Subtitle"
 listDir = [os.path.join(directory,o) for o in os.listdir(directory) if (os.path.isdir(os.path.join(directory,o)) and re.search("[0-9][0-9][0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9][0-9][0-9]", o))]
 for aDir in listDir:
+    excludedSub = []
     association = {}
     tmpEpisode = []
     listSubtitle = []
@@ -90,8 +90,9 @@ for aDir in listDir:
             print ("##################################")
             print ("For episode : "+aVideo)
             for aResult in sortedSub:
-                if query_yes_no("Associate '"+aResult[0]+"' with this episode ?"):
+                if aResult[0] not in excludedSub and query_yes_no("Associate '"+aResult[0]+"' with this episode ?"):
                     association[aVideo] = aResult[0]
+                    excludedSub.append(aResult[0])
                     break
     for anAsso in association.keys():
         newSrtFileName = (anAsso[:-4])+".srt"
