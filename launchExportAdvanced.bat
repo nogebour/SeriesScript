@@ -1,2 +1,0 @@
-python ./ExportEpisodesNewGen.py
-pause

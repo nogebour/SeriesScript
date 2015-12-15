@@ -4,37 +4,7 @@ import os.path
 import re
 import operator
 from difflib import SequenceMatcher
-def query_yes_no(question, default="yes"):
-    """Ask a yes/no question via raw_input() and return their answer.
-
-    "question" is a string that is presented to the user.
-    "default" is the presumed answer if the user just hits <Enter>.
-        It must be "yes" (the default), "no" or None (meaning
-        an answer is required of the user).
-
-    The "answer" return value is True for "yes" or False for "no".
-    """
-    valid = {"yes": True, "y": True, "ye": True,
-             "no": False, "n": False}
-    if default is None:
-        prompt = " [y/n] "
-    elif default == "yes":
-        prompt = " [Y/n] "
-    elif default == "no":
-        prompt = " [y/N] "
-    else:
-        raise ValueError("invalid default answer: '%s'" % default)
-
-    while True:
-        sys.stdout.write(question + prompt)
-        choice = input().lower()
-        if default is not None and choice == '':
-            return valid[default]
-        elif choice in valid:
-            return valid[choice]
-        else:
-            sys.stdout.write("Please respond with 'yes' or 'no' "
-                             "(or 'y' or 'n').\n")
+from Utils.InteractionUtils import InteractionUtils
 
 debug = False
 directory = r"C:\Users\nogebour\Videos\Others"
@@ -90,11 +60,11 @@ for aDir in listDir:
             print ("##################################")
             print ("For episode : "+aVideo)
             for aResult in sortedSub:
-                if aResult[0] not in excludedSub and query_yes_no("Associate '"+aResult[0]+"' with this episode ?"):
+                if aResult[0] not in excludedSub and InteractionUtils.query_yes_no("Associate '"+aResult[0]+"' with this episode ?"):
                     association[aVideo] = aResult[0]
                     excludedSub.append(aResult[0])
                     break
     for anAsso in association.keys():
         newSrtFileName = (anAsso[:-4])+".srt"
-        if query_yes_no("Rename '"+association[anAsso]+"' to "+newSrtFileName):
+        if InteractionUtils.query_yes_no("Rename '"+association[anAsso]+"' to "+newSrtFileName):
             os.rename(os.path.join(aDir,association[anAsso]), os.path.join(aDir,newSrtFileName))
