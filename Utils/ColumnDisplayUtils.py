@@ -40,21 +40,15 @@ class DisplayListUtils:
 
 if __name__ == '__main__':
     object1 = {'id':108530,
-              'integrator':'ngidelde',
-              'title':'{record:10886378} Remove infinite loop in getAircraftOwner()',
+              'title':'Remove infinite loop in getOwner()',
               'urgency':'Normal',
-              'records':'PTR#10886378',
-              'validationDate':'2015-12-15 15:02:58',
-              'developer':'JREY'}
+              'validationDate':'2015-12-15 15:02:58'}
     object2 = {'id':108427,
-              'integrator':'ngidelde',
               'title':'fix cascading',
               'urgency':'Normal',
-              'records':'PTR#10851597',
-              'validationDate':'2015-12-15 13:02:58',
-              'developer':'nnoel'}
+              'validationDate':'2015-12-15 13:02:58'}
     objectList = [object1,object2]
-    titleList = ['id','integrator','title','urgency','records','validationDate','developer']
-    formatTitle = {'id':'l','integrator':'l','title':'c','urgency':'l','records':'c','validationDate':'l','developer':'r'}
+    titleList = ['id','title','urgency','validationDate']
+    formatTitle = {'id':'l','title':'c','urgency':'r','validationDate':'l'}
     aDisplayObject = DisplayListUtils()
     aDisplayObject.displayList(objectList,titleList,formatTitle)
